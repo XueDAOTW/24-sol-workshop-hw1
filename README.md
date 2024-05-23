@@ -19,7 +19,7 @@ Develop the core functionality to enable token transfers between addresses.
 **Unit Test Command:**
 
 ```bash
-forge test --mt test_check_transfer_points -vvv
+forge test --mt test_CheckTransferPoints -vvv
 ```
 
 ### 2. Implement Token Approval
@@ -29,7 +29,7 @@ Enable address owners to approve third parties to spend tokens on their behalf.
 **Unit Test Command:**
 
 ```bash
-forge test --mt test_check_approve_points -vvv
+forge test --mt test_CheckApprovePoints -vvv
 ```
 
 ### 3. Implement TransferFrom Functionality
@@ -39,7 +39,7 @@ Allow third parties to transfer tokens on behalf of the address owners, within t
 **Unit Test Command:**
 
 ```bash
-forge test --mt test_check_transferFrom_points -vvv
+forge test --mt test_CheckTransferFromPoints -vvv
 ```
 
 ## Smart Contract Location
