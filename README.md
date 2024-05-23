@@ -1,102 +1,60 @@
-# Foundry Template [![Open in Gitpod][gitpod-badge]][gitpod] [![Github Actions][gha-badge]][gha] [![Foundry][foundry-badge]][foundry] [![License: MIT][license-badge]][license]
+# XueDAO - CONNECT Hackathon: XueToken Workshop
 
-[gitpod]: https://gitpod.io/#https://github.com/XueDAOTW/24-sol-workshop-hw1
-[gitpod-badge]: https://img.shields.io/badge/Gitpod-Open%20in%20Gitpod-FFB45B?logo=gitpod
-[gha]: https://github.com/XueDAOTW/24-sol-workshop-hw1/actions
-[gha-badge]: https://github.com/XueDAOTW/24-sol-workshop-hw1/actions/workflows/ci.yml/badge.svg
-[foundry]: https://getfoundry.sh/
-[foundry-badge]: https://img.shields.io/badge/Built%20with-Foundry-FFDB1C.svg
-[license]: https://opensource.org/licenses/MIT
-[license-badge]: https://img.shields.io/badge/License-MIT-blue.svg
+XueDAO is excited to present the **CONNECT Hackathon**, featuring a comprehensive Solidity workshop designed to provide
+participants with hands-on experience in blockchain technology and smart contract development. As part of this workshop,
+we will guide you through the creation and deployment of an ERC-20 token, aptly named **XueToken**.
 
-A Foundry-based template for developing Solidity smart contracts, with sensible defaults.
+## Workshop Overview
 
-## What's Inside
+Participants in the workshop will have the opportunity to design, develop, and test XueToken, an ERC-20 compliant token.
+The project is structured into three main parts, each focusing on a critical aspect of token functionality. To ensure a
+comprehensive understanding, participants must complete the following steps and pass the associated unit tests.
 
-- [Forge](https://github.com/foundry-rs/foundry/blob/master/forge): compile, test, fuzz, format, and deploy smart
-  contracts
-- [Forge Std](https://github.com/foundry-rs/forge-std): collection of helpful contracts and utilities for testing
-- [Prettier](https://github.com/prettier/prettier): code formatter for non-Solidity files
-- [Solhint](https://github.com/protofire/solhint): linter for Solidity code
+## Tasks and Unit Tests
 
-## Getting Started
+### 1. Implement Basic Token Transfer
 
-Click the [`Use this template`](https://github.com/PaulRBerg/foundry-template/generate) button at the top of the page to
-create a new repository with this repo as the initial state.
+Develop the core functionality to enable token transfers between addresses.
 
-Or, if you prefer to install the template manually:
+**Unit Test Command:**
 
-```sh
-$ mkdir my-project
-$ cd my-project
-$ forge init --template PaulRBerg/foundry-template
-$ bun install # install Solhint, Prettier, and other Node.js deps
+```bash
+forge test --mt test_check_transfer_points -vvv
 ```
 
-If this is your first time with Foundry, check out the
-[installation](https://github.com/foundry-rs/foundry#installation) instructions.
+### 2. Implement Token Approval
 
-## Features
+Enable address owners to approve third parties to spend tokens on their behalf.
 
-This template builds upon the frameworks and libraries mentioned above, so please consult their respective documentation
-for details about their specific features.
+**Unit Test Command:**
 
-For example, if you're interested in exploring Foundry in more detail, you should look at the
-[Foundry Book](https://book.getfoundry.sh/). In particular, you may be interested in reading the
-[Writing Tests](https://book.getfoundry.sh/forge/writing-tests.html) tutorial.
-
-### Sensible Defaults
-
-This template comes with a set of sensible default configurations for you to use. These defaults can be found in the
-following files:
-
-```text
-├── .editorconfig
-├── .gitignore
-├── .prettierignore
-├── .prettierrc.yml
-├── .solhint.json
-├── foundry.toml
-└── remappings.txt
+```bash
+forge test --mt test_check_approve_points -vvv
 ```
 
-### VSCode Integration
+### 3. Implement TransferFrom Functionality
 
-This template is IDE agnostic, but for the best user experience, you may want to use it in VSCode alongside Nomic
-Foundation's [Solidity extension](https://marketplace.visualstudio.com/items?itemName=NomicFoundation.hardhat-solidity).
+Allow third parties to transfer tokens on behalf of the address owners, within the approved limits.
 
-For guidance on how to integrate a Foundry project in VSCode, please refer to this
-[guide](https://book.getfoundry.sh/config/vscode).
+**Unit Test Command:**
 
-### GitHub Actions
+```bash
+forge test --mt test_check_transferFrom_points -vvv
+```
 
-This template comes with GitHub Actions pre-configured. Your contracts will be linted and tested on every push and pull
-request made to the `main` branch.
+## Smart Contract Location
 
-You can edit the CI script in [.github/workflows/ci.yml](./.github/workflows/ci.yml).
+The smart contract for XueToken is located in the following directory:
 
-## Installing Dependencies
+```bash
+./src/XueToken.sol
+```
 
-Foundry typically uses git submodules to manage dependencies, but this template uses Node.js packages because
-[submodules don't scale](https://twitter.com/PaulRBerg/status/1736695487057531328).
+Unit tests are available in:
 
-This is how to install dependencies:
-
-1. Install the dependency using your preferred package manager, e.g. `bun install dependency-name`
-   - Use this syntax to install from GitHub: `bun install github:username/repo-name`
-2. Add a remapping for the dependency in [remappings.txt](./remappings.txt), e.g.
-   `dependency-name=node_modules/dependency-name`
-
-Note that OpenZeppelin Contracts is pre-installed, so you can follow that as an example.
-
-## Writing Tests
-
-To write a new test contract, you start by importing `Test` from `forge-std`, and then you inherit it in your test
-contract. Forge Std comes with a pre-instantiated [cheatcodes](https://book.getfoundry.sh/cheatcodes/) environment
-accessible via the `vm` property. If you would like to view the logs in the terminal output, you can add the `-vvv` flag
-and use [console.log](https://book.getfoundry.sh/faq?highlight=console.log#how-do-i-use-consolelog).
-
-This template comes with an example test contract [Foo.t.sol](./test/Foo.t.sol)
+```bash
+./test/XueToken.t.sol
+```
 
 ## Usage
 
@@ -169,7 +127,7 @@ $ forge test --gas-report
 Lint the contracts:
 
 ```sh
-$ bun run lint
+$ pnpm run lint
 ```
 
 ### Test
@@ -183,14 +141,14 @@ $ forge test
 Generate test coverage and output result to the terminal:
 
 ```sh
-$ bun run test:coverage
+$ pnpm run test:coverage
 ```
 
 Generate test coverage with lcov report (you'll have to open the `./coverage/index.html` file in your browser, to do so
 simply copy paste the path):
 
 ```sh
-$ bun run test:coverage:report
+$ pnpm run test:coverage:report
 ```
 
 ## Related Efforts
