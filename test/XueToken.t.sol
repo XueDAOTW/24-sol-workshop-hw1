@@ -30,22 +30,7 @@ contract XueTokenTest is Test {
     event Claim(address indexed user, uint256 indexed amount);
 
     function setUp() public {
-        token = new XueToken("XueToken", "Xue");
-
-        // create two Jennifers
-        Kevin = makeAddr("Kevin");
-        Louis = makeAddr("Louis");
-        Jennifer = makeAddr("Jennifer");
-
-        vm.prank(Kevin);
-        vm.expectEmit(true, true, false, false);
-        emit Claim(Kevin, 1e18);
-        token.claim();
-
-        vm.prank(Louis);
-        vm.expectEmit(true, true, false, false);
-        emit Claim(Louis, 1e18);
-        token.claim();
+        _deployAndSetUpNewToken();
     }
 
     /*//////////////////////////////////////////////////////////////
@@ -182,9 +167,30 @@ contract XueTokenTest is Test {
     }
 
     function test_GetTotalScore() public {
+        _resetState();
         test_CheckTransferPoints();
+        _resetState();
         test_CheckApprovePoints();
+        _resetState();
         test_CheckTransferFromPoints();
         console2.log("Total Score:", totalScore);
+    }
+
+    function _deployAndSetUpNewToken() internal {
+        token = new XueToken("XueToken", "Xue");
+        Kevin = makeAddr("Kevin");
+        Louis = makeAddr("Louis");
+        Jennifer = makeAddr("Jennifer");
+
+        vm.prank(Kevin);
+        token.claim();
+
+        vm.prank(Louis);
+        token.claim();
+    }
+
+    function _resetState() internal {
+        vm.roll(block.number + 1);
+        _deployAndSetUpNewToken();
     }
 }
